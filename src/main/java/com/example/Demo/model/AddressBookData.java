@@ -7,9 +7,7 @@ import com.example.Demo.dto.AddressBookDTO;
 public class AddressBookData {
 
 	public String name;
-
 	public String city;
-
 	public String state;
 	public long pinCode;
 
