@@ -1,7 +1,5 @@
 package com.example.Demo.model;
 
-import javax.validation.constraints.NotEmpty;
-
 import com.example.Demo.dto.AddressBookDTO;
 
 public class AddressBookData {

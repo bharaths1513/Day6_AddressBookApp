@@ -21,26 +21,28 @@ import com.example.Demo.dto.ResponseDTO;
 import com.example.Demo.model.AddressBookData;
 import com.example.Demo.service.IAddressBookService;
 
-
 @RestController
 @RequestMapping("/addressbookapp")
 public class AddressBookAppController {
 	private static final AddressBookDTO addressBookDTO = null;
 	@Autowired
-	private  IAddressBookService addressBookService;
-/*RequestMapping:use to pass the URL.
- * return:message get call successful.
- */
+	private IAddressBookService addressBookService;
+
+	/*
+	 * RequestMapping:use to pass the URL. return:message get call successful.
+	 */
 	@RequestMapping(value = { "/get" })
 	public ResponseEntity<ResponseDTO> getAddressBookData() {
 		List<AddressBookData> addressBookList = null;
-		addressBookList=addressBookService.getAddressBookData();
+		addressBookList = addressBookService.getAddressBookData();
 		ResponseDTO respDTO = new ResponseDTO("Get call Successful:", addressBookList);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
-/*@GetMapping:passed URL with pinCod
- * return:response which takes the Code and return city state.
- */
+
+	/*
+	 * @GetMapping:passed URL with pinCod return:response which takes the Code and
+	 * return city state.
+	 */
 	@GetMapping("/get/{pinCode}")
 	public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable("pinCode") int pinCode) {
 		AddressBookData addressbookData = null;
@@ -48,31 +50,35 @@ public class AddressBookAppController {
 		ResponseDTO respDTO = new ResponseDTO("Get call for pinCode Successful:", addressbookData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
-/*PostMapping:Use to pass the url.
- * return:create the data by taking JSON file.
- */
+
+	/*
+	 * PostMapping : To create Address Data 
+	 * return :  the data by taking JSON file.
+	 */
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> addAddressBookData(@Valid @RequestBody AddressBookDTO addressbookDTO) {
 		AddressBookData addressbookData = null;
-		addressbookData =addressBookService.createAddressBookData(addressbookDTO);
+		addressbookData = addressBookService.createAddressBookData(addressbookDTO);
 		ResponseDTO respDTO = new ResponseDTO("Create AddressBook Data:", addressbookData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
-/*put method is use to update the data.
- * by passing pinCode.
- */
+
+	/*
+	 * put method is use to update the data. by passing pinCode.
+	 */
 	@PutMapping("/update/{pinCode}")
 	public ResponseEntity<ResponseDTO> updateAddressBookData(@Valid @PathVariable("pinCode") int pinCode,
-			@RequestBody AddressBookDTO empPayrollDTO) {
+			@RequestBody AddressBookDTO addressbookDTO) {
 		AddressBookData addressbookData = null;
 		addressbookData = addressBookService.updateAddressBookData(pinCode, addressBookDTO);
 		ResponseDTO respDTO = new ResponseDTO("Update AddressBook Successful:", addressbookData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 
 	}
-/*DeleteMapping:paa the url with pinCode
- * return:the message that the data got deleted by using the pinCode.
- */
+
+	/*
+	 * return:the message that the data got deleted by using the pinCode.
+	 */
 	@DeleteMapping("/delete/{pinCode}")
 	public ResponseEntity<ResponseDTO> deleteAddressBookData(@PathVariable("pinCode") int pinCode) {
 		addressBookService.deleteAddressBookData(pinCode);

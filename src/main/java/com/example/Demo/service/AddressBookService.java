@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.Demo.dto.AddressBookDTO;
+import com.example.Demo.exception.AddressBookException;
 import com.example.Demo.model.AddressBookData;
 
 
@@ -41,6 +42,8 @@ class AddressBookService implements IAddressBookService {
 
 	@Override
 	public AddressBookData getAddressByPinCode(int pinCode) {
-		return addressBooklist.get(pinCode - 1);
+		
+		return addressBooklist.stream().filter(address -> address.getPinCode() == pinCode).findFirst()
+				.orElseThrow(() -> new AddressBookException("Address Not Found"));
 	}
 }
