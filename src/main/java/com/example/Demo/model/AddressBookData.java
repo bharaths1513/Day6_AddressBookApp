@@ -1,16 +1,20 @@
 package com.example.Demo.model;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.example.Demo.dto.AddressBookDTO;
 
 public class AddressBookData {
+
 	public String name;
+
 	public String city;
+
 	public String state;
 	public long pinCode;
 
 	public AddressBookData(long pinCode, AddressBookDTO addressbookDTO) {
 
-		
 		this.pinCode = pinCode;
 		this.state = addressbookDTO.state;
 		this.city = addressbookDTO.city;

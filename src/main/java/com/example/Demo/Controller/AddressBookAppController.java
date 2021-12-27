@@ -2,6 +2,8 @@ package com.example.Demo.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +52,7 @@ public class AddressBookAppController {
  * return:create the data by taking JSON file.
  */
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> addAddressBookData(@RequestBody AddressBookDTO addressbookDTO) {
+	public ResponseEntity<ResponseDTO> addAddressBookData(@Valid @RequestBody AddressBookDTO addressbookDTO) {
 		AddressBookData addressbookData = null;
 		addressbookData =addressBookService.createAddressBookData(addressbookDTO);
 		ResponseDTO respDTO = new ResponseDTO("Create AddressBook Data:", addressbookData);
@@ -60,7 +62,7 @@ public class AddressBookAppController {
  * by passing pinCode.
  */
 	@PutMapping("/update/{pinCode}")
-	public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("pinCode") int pinCode,
+	public ResponseEntity<ResponseDTO> updateAddressBookData(@Valid @PathVariable("pinCode") int pinCode,
 			@RequestBody AddressBookDTO empPayrollDTO) {
 		AddressBookData addressbookData = null;
 		addressbookData = addressBookService.updateAddressBookData(pinCode, addressBookDTO);
